@@ -7,8 +7,8 @@ import tourism.model.TouristAttraction;
 
 @Repository
 public class TouristRepository {
-    private ArrayList<TouristAttraction> attractions = new ArrayList<>();
-    
+    private final ArrayList<TouristAttraction> attractions = new ArrayList<>();
+
     public TouristRepository(){
         addSampleToList();
     }
@@ -23,4 +23,28 @@ public class TouristRepository {
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
     }
+    public void addAttraction(TouristAttraction newAttraction){
+        attractions.add(newAttraction);
+    }
+
+    public TouristAttraction findAttractionByName(String name){
+        for(TouristAttraction attraction : attractions){
+            if (attraction.getName().equalsIgnoreCase(name)){
+                return attraction;
+            }
+        }
+        return null;
+    }
+
+    public void deleteAttraction(String name){
+        attractions.remove(findAttractionByName(name));
+    }
+
+    public void updateAttraction(TouristAttraction attraction, String newName, String newDescription){
+        attraction.setName(newName);
+        attraction.setDescription(newDescription);
+    }
+
+
+
 }
