@@ -1,13 +1,13 @@
-package com.example.demo_turist_guide_one;
+package tourism;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoTuristGuideOneApplication {
+public class TouristGuideApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoTuristGuideOneApplication.class, args);
+        SpringApplication.run(TouristGuideApplication.class, args);
     }
 
 }
