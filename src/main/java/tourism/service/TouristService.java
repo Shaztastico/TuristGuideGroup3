@@ -14,8 +14,8 @@ public class TouristService {
         this.repository = repository;
     }
 
-    public void addAttraction(String name){
-        repository.addAttraction(repository.findAttractionByName(name));
+    public void addAttraction(String name, String description){
+        repository.addAttraction(name, description);
     }
 
     public void deleteAttraction(String name){

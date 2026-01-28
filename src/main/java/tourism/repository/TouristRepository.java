@@ -20,11 +20,16 @@ public class TouristRepository {
         attractions.add(a2);
     }
 
+    private TouristAttraction createAttraction(String name, String description){
+        return new TouristAttraction(name, description);
+    }
+
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
     }
-    public void addAttraction(TouristAttraction newAttraction){
-        attractions.add(newAttraction);
+
+    public void addAttraction(String name, String description){
+        attractions.add(createAttraction(name, description));
     }
 
     public TouristAttraction findAttractionByName(String name){
