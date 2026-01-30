@@ -28,9 +28,16 @@ public class TouristController {
 
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> findAttractionByName(@PathVariable String name){
-        ResponseEntity<TouristAttraction> response = new ResponseEntity<TouristAttraction>(service.findAttractionByName(name), HttpStatus.OK);
+        //ResponseEntity<TouristAttraction> response = new ResponseEntity<TouristAttraction>(service.findAttractionByName(name), HttpStatus.OK);
 
-        return response;
+        //return response;
+
+        TouristAttraction found = service.findAttractionByName(name);
+        if (found == null){
+            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(found);
     }
 
 
@@ -40,6 +47,7 @@ public class TouristController {
         return new ResponseEntity<>("Controller is working!!", HttpStatus.OK);
     }
 
+    // null check
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
         TouristAttraction createdAttraction = new TouristAttraction(attraction.getName(), attraction.getDescription());
