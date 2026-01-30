@@ -42,7 +42,7 @@ public class TouristController {
     public ResponseEntity<String> test(){
         return new ResponseEntity<>("Controller is working!!", HttpStatus.OK);
     }
-    
+
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
         if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
@@ -59,13 +59,33 @@ public class TouristController {
 
 
     @PostMapping("/update")
-    public ResponseEntity<UpdateRequest> update(@RequestBody UpdateRequest attraction){
-        if (service.findAttractionByName(attraction.getOldName()) != null){
-            service.findAttractionByName(attraction.getOldName()).setName(attraction.getNewName());
-            service.findAttractionByName(attraction.getNewName()).setDescription(attraction.getNewDescription());
+    public ResponseEntity<UpdateRequest> update(@RequestBody UpdateRequest request){
+        if (request.getOldName() == null){
+            return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<UpdateRequest>(attraction, HttpStatus.OK);
+        TouristAttraction found = service.findAttractionByName(request.getOldName());
+
+        if (found == null){
+            return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.NOT_FOUND);
+        }
+
+        if(request.getNewName() == null || request.getNewName().isEmpty()){
+            found.setDescription(request.getNewDescription());
+            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+        }
+
+        if(request.getNewDescription() == null || request.getNewDescription().isEmpty()){
+            found.setName(request.getNewName());
+            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+        }
+        else {
+
+            found.setName(request.getNewName());
+            found.setDescription(request.getNewDescription());
+
+            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+        }
     }
 
      @PostMapping("/delete/{name}")
