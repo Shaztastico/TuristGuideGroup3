@@ -28,10 +28,6 @@ public class TouristController {
 
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> findAttractionByName(@PathVariable String name){
-        //ResponseEntity<TouristAttraction> response = new ResponseEntity<TouristAttraction>(service.findAttractionByName(name), HttpStatus.OK);
-
-        //return response;
-
         TouristAttraction found = service.findAttractionByName(name);
         if (found == null){
             return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.NOT_FOUND);
