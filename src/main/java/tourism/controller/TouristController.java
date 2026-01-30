@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import tourism.model.TouristAttraction;
 import tourism.model.UpdateRequest;
 import tourism.service.TouristService;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
