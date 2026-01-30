@@ -42,13 +42,18 @@ public class TouristController {
     public ResponseEntity<String> test(){
         return new ResponseEntity<>("Controller is working!!", HttpStatus.OK);
     }
-
-    // null check
+    
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
+        if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
+            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
+        }
+        if(attraction.getName() == null || attraction.getDescription() == null){
+            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
+        }
         TouristAttraction createdAttraction = new TouristAttraction(attraction.getName(), attraction.getDescription());
         service.addAttraction(createdAttraction.getName(), createdAttraction.getDescription());
-        return new ResponseEntity<TouristAttraction>(createdAttraction, HttpStatus.valueOf(201));
+        return new ResponseEntity<TouristAttraction>(createdAttraction, HttpStatus.CREATED);
     }
 
 
