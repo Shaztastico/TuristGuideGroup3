@@ -43,13 +43,13 @@ public class TouristController {
 
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
-        if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
-            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
-        }
+
         if(attraction.getName() == null || attraction.getDescription() == null){
             return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
         }
-
+        if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
+            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
+        }
         for (TouristAttraction a : service.getAttractions()){
             if (attraction.getName().equalsIgnoreCase(a.getName())){
                 return new ResponseEntity<TouristAttraction>(attraction, HttpStatus.BAD_REQUEST);
