@@ -109,12 +109,12 @@ Content-Type: application/json
   "newDescription": "NewDescription"
 }
 
-### FIX: !!! newName already exists !!! (200 OK)
+### Error: newName already exists (400 BAD REQUEST)
 POST localhost:8080/attractions/update
 Content-Type: application/json
 
 {
-  "oldName": "Dolphin Experience",
+  "oldName": "Dolphin Show",
   "newName": "Cat Cafe",
   "newDescription": "Conflict test"
 }

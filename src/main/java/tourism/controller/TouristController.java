@@ -75,6 +75,12 @@ public class TouristController {
             return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.NOT_FOUND);
         }
 
+        for (TouristAttraction attraction : service.getAttractions()){
+            if (request.getNewName().equalsIgnoreCase(attraction.getName())){
+                return new ResponseEntity<UpdateRequest>(request, HttpStatus.BAD_REQUEST);
+            }
+        }
+
         if(request.getNewName() == null || request.getNewName().isEmpty()){
             found.setDescription(request.getNewDescription());
             return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
