@@ -49,6 +49,13 @@ public class TouristController {
         if(attraction.getName() == null || attraction.getDescription() == null){
             return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
         }
+
+        for (TouristAttraction a : service.getAttractions()){
+            if (attraction.getName().equalsIgnoreCase(a.getName())){
+                return new ResponseEntity<TouristAttraction>(attraction, HttpStatus.BAD_REQUEST);
+            }
+        }
+
         TouristAttraction createdAttraction = new TouristAttraction(attraction.getName(), attraction.getDescription());
         service.addAttraction(createdAttraction.getName(), createdAttraction.getDescription());
         return new ResponseEntity<TouristAttraction>(createdAttraction, HttpStatus.CREATED);

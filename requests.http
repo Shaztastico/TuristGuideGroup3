@@ -57,7 +57,7 @@ Content-Type: application/json
   "description": ""
 }
 
-### FIX: !!! Duplicate name is still allowed !!! (201 CREATED)
+### Error: duplicate name (400 BAD REQUEST)
 POST localhost:8080/attractions/add
 Content-Type: application/json
 
