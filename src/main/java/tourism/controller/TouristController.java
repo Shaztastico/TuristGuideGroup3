@@ -43,12 +43,19 @@ public class TouristController {
 
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
-        if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
-            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
-        }
+
         if(attraction.getName() == null || attraction.getDescription() == null){
             return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
         }
+        if(attraction.getName().isEmpty() || attraction.getDescription().isEmpty()){
+            return new ResponseEntity<TouristAttraction>((TouristAttraction) null, HttpStatus.BAD_REQUEST);
+        }
+        for (TouristAttraction a : service.getAttractions()){
+            if (attraction.getName().equalsIgnoreCase(a.getName())){
+                return new ResponseEntity<TouristAttraction>(attraction, HttpStatus.BAD_REQUEST);
+            }
+        }
+
         TouristAttraction createdAttraction = new TouristAttraction(attraction.getName(), attraction.getDescription());
         service.addAttraction(createdAttraction.getName(), createdAttraction.getDescription());
         return new ResponseEntity<TouristAttraction>(createdAttraction, HttpStatus.CREATED);
@@ -66,6 +73,12 @@ public class TouristController {
 
         if (found == null){
             return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.NOT_FOUND);
+        }
+
+        for (TouristAttraction attraction : service.getAttractions()){
+            if (request.getNewName().equalsIgnoreCase(attraction.getName())){
+                return new ResponseEntity<UpdateRequest>(request, HttpStatus.BAD_REQUEST);
+            }
         }
 
         if(request.getNewName() == null || request.getNewName().isEmpty()){

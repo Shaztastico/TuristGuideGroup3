@@ -32,7 +32,7 @@ Content-Type: application/json
   "description": "A place with many underwater animals"
 }
 
-### Error: missing name (should return 400 BAD REQUEST) TO FIX: THIS YIELDS 500
+### Error: missing name (400 BAD REQUEST)
 POST http://localhost:8080/attractions/add
 Content-Type: application/json
 
@@ -40,7 +40,7 @@ Content-Type: application/json
   "description": "Missing name field"
 }
 
-### Error: missing description (should return 400 BAD REQUEST) !!! TO FIX: THIS YIELDS 500
+### Error: missing description (400 BAD REQUEST)
 POST localhost:8080/attractions/add
 Content-Type: application/json
 
@@ -57,7 +57,7 @@ Content-Type: application/json
   "description": ""
 }
 
-### FIX: !!! Duplicate name is still allowed !!! (201 CREATED)
+### Error: duplicate name (400 BAD REQUEST)
 POST localhost:8080/attractions/add
 Content-Type: application/json
 
@@ -109,12 +109,12 @@ Content-Type: application/json
   "newDescription": "NewDescription"
 }
 
-### FIX: !!! newName already exists !!! (200 OK)
+### Error: newName already exists (400 BAD REQUEST)
 POST localhost:8080/attractions/update
 Content-Type: application/json
 
 {
-  "oldName": "Dolphin Experience",
+  "oldName": "Dolphin Show",
   "newName": "Cat Cafe",
   "newDescription": "Conflict test"
 }
