@@ -71,6 +71,9 @@ public class TouristController {
         }
 
         // Prevent renaming to an already existing attraction name
+        // ATTN: There is a design conflict: if oldName and newName fields are the same
+        // and the user actually only wanted to update the description of an existing attraction
+        // this check prevents that user case.
         for (TouristAttraction attraction : service.getAttractions()){
             if (update.getNewName() != null && update.getNewName().equalsIgnoreCase(attraction.getName())){
                 // reject update if the newName is already taken
