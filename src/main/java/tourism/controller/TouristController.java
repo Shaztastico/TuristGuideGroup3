@@ -64,38 +64,38 @@ public class TouristController {
 
 
     @PostMapping("/update")
-    public ResponseEntity<AttractionUpdate> update(@RequestBody AttractionUpdate request){
-        if (request.getOldName() == null){
+    public ResponseEntity<AttractionUpdate> update(@RequestBody AttractionUpdate update){
+        if (update.getOldName() == null){
             return new ResponseEntity<AttractionUpdate>((AttractionUpdate) null, HttpStatus.BAD_REQUEST);
         }
 
-        TouristAttraction found = service.findAttractionByName(request.getOldName());
+        TouristAttraction found = service.findAttractionByName(update.getOldName());
 
         if (found == null){
             return new ResponseEntity<AttractionUpdate>((AttractionUpdate) null, HttpStatus.NOT_FOUND);
         }
 
         for (TouristAttraction attraction : service.getAttractions()){
-            if (request.getNewName().equalsIgnoreCase(attraction.getName())){
-                return new ResponseEntity<AttractionUpdate>(request, HttpStatus.BAD_REQUEST);
+            if (update.getNewName().equalsIgnoreCase(attraction.getName())){
+                return new ResponseEntity<AttractionUpdate>(update, HttpStatus.BAD_REQUEST);
             }
         }
 
-        if(request.getNewName() == null || request.getNewName().isEmpty()){
-            found.setDescription(request.getNewDescription());
-            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
+        if(update.getNewName() == null || update.getNewName().isEmpty()){
+            found.setDescription(update.getNewDescription());
+            return new ResponseEntity<AttractionUpdate>(update, HttpStatus.OK);
         }
 
-        if(request.getNewDescription() == null || request.getNewDescription().isEmpty()){
-            found.setName(request.getNewName());
-            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
+        if(update.getNewDescription() == null || update.getNewDescription().isEmpty()){
+            found.setName(update.getNewName());
+            return new ResponseEntity<AttractionUpdate>(update, HttpStatus.OK);
         }
         else {
 
-            found.setName(request.getNewName());
-            found.setDescription(request.getNewDescription());
+            found.setName(update.getNewName());
+            found.setDescription(update.getNewDescription());
 
-            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
+            return new ResponseEntity<AttractionUpdate>(update, HttpStatus.OK);
         }
     }
 
