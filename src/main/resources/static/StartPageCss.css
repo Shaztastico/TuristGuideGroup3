@@ -14,7 +14,6 @@
 }
 
 .nav {
-    list-style: none;
     display: flex;
     gap: 20px;
     padding: 0;
@@ -24,6 +23,10 @@
     width: 100%;
     z-index: 1000;
     top: 0;
+}
+.nav ul{
+    display: flex;
+    list-style: none;
 }
 
 .nav li a {
