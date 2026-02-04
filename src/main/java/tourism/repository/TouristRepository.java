@@ -29,7 +29,7 @@ public class TouristRepository {
     }
 
     public void addAttraction(String name, String description){
-        attractions.add(createAttraction(name, description));
+        attractions.add(new TouristAttraction(name, description));
     }
 
     public TouristAttraction findAttractionByName(String name){

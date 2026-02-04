@@ -105,15 +105,16 @@ Content-Type: application/json
   "newDescription": "NewDescription"
 }
 
-### Error: newName already exists (400 BAD REQUEST)
+### Valid: no newName field (200 OK) only update description
 POST localhost:8080/attractions/update
 Content-Type: application/json
 
 {
-  "oldName": "Dolphin Show",
-  "newName": "Cat Cafe",
-  "newDescription": "Conflict test"
+  "oldName": "Dolphin Experience",
+  "newDescription": "New description null newName field"
 }
+
+
 
 ###
 # 5. DELETE ATTRACTION
