@@ -14,7 +14,7 @@ public class TouristRepository {
     }
 
     public void addSampleToList(){
-        TouristAttraction a1 = new TouristAttraction("Dolphin Show", "A show featuring acrobatic dolphins");
+        TouristAttraction a1 = new TouristAttraction("DolphinShow", "A show featuring acrobatic dolphins");
         TouristAttraction a2 = new TouristAttraction("Cat Cafe", "A coffee shop chock full of cats to pet and play with");
         attractions.add(a1);
         attractions.add(a2);
