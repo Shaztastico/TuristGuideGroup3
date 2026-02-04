@@ -90,3 +90,30 @@ body {
     border: 3px solid black;
     background-color: rgba(255, 255, 255, 0.7);
 }
+.footnav {
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+}
+.footnav ul{
+    list-style: none;
+}
+
+.footnav li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+
+}
+
+.footnav li a:hover {
+    .nav li a:active {
+        color: blue;
+    }
+
+    color: blue;
+}
