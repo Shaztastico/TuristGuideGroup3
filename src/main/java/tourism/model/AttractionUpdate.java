@@ -1,6 +1,6 @@
 package tourism.model;
 
-public class UpdateRequest {
+public class AttractionUpdate {
     private String oldName;
     private String newName;
     private String newDescription;

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tourism.model.TouristAttraction;
-import tourism.model.UpdateRequest;
+import tourism.model.AttractionUpdate;
 import tourism.service.TouristService;
 import java.util.List;
 
@@ -64,38 +64,38 @@ public class TouristController {
 
 
     @PostMapping("/update")
-    public ResponseEntity<UpdateRequest> update(@RequestBody UpdateRequest request){
+    public ResponseEntity<AttractionUpdate> update(@RequestBody AttractionUpdate request){
         if (request.getOldName() == null){
-            return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AttractionUpdate>((AttractionUpdate) null, HttpStatus.BAD_REQUEST);
         }
 
         TouristAttraction found = service.findAttractionByName(request.getOldName());
 
         if (found == null){
-            return new ResponseEntity<UpdateRequest>((UpdateRequest) null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<AttractionUpdate>((AttractionUpdate) null, HttpStatus.NOT_FOUND);
         }
 
         for (TouristAttraction attraction : service.getAttractions()){
             if (request.getNewName().equalsIgnoreCase(attraction.getName())){
-                return new ResponseEntity<UpdateRequest>(request, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<AttractionUpdate>(request, HttpStatus.BAD_REQUEST);
             }
         }
 
         if(request.getNewName() == null || request.getNewName().isEmpty()){
             found.setDescription(request.getNewDescription());
-            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
         }
 
         if(request.getNewDescription() == null || request.getNewDescription().isEmpty()){
             found.setName(request.getNewName());
-            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
         }
         else {
 
             found.setName(request.getNewName());
             found.setDescription(request.getNewDescription());
 
-            return new ResponseEntity<UpdateRequest>(request, HttpStatus.OK);
+            return new ResponseEntity<AttractionUpdate>(request, HttpStatus.OK);
         }
     }
 
