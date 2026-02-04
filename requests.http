@@ -1,15 +1,11 @@
 ###
-# 1. GET TEST ENDPOINT (200 OK)
-GET http://localhost:8080/attractions/test
-
-###
-# 2. GET ALL ATTRACTIONS (200 OK)
+# 1. GET ALL ATTRACTIONS (200 OK)
 
 ### Get all attractions
 GET localhost:8080/attractions
 
 ###
-# 3. GET ATTRACTION BY NAME
+# 2. GET ATTRACTION BY NAME
 
 ### Get existing attraction (200 OK)
 GET localhost:8080/attractions/Dolphin Show
@@ -21,7 +17,7 @@ GET localhost:8080/attractions/Cat Cafe
 GET localhost:8080/attractions/Unknown
 
 ###
-# 4. ADD NEW ATTRACTION
+# 3. ADD NEW ATTRACTION
 
 ### Add valid attraction (201 CREATED)
 POST localhost:8080/attractions/add
@@ -67,7 +63,7 @@ Content-Type: application/json
 }
 
 ###
-# . 5 UPDATE ATTRACTION
+# 4. UPDATE ATTRACTION
 
 ### Valid update: change name + description (200 OK)
 POST localhost:8080/attractions/update
@@ -120,7 +116,7 @@ Content-Type: application/json
 }
 
 ###
-# 6. DELETE ATTRACTION
+# 5. DELETE ATTRACTION
 
 ### Valid delete (200 OK)
 POST http://localhost:8080/attractions/delete/Cat Cafe

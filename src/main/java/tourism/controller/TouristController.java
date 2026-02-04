@@ -34,13 +34,6 @@ public class TouristController {
         return ResponseEntity.ok(found);
     }
 
-
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test(){
-        return new ResponseEntity<>("Controller is working!!", HttpStatus.OK);
-    }
-
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction){
 
@@ -76,7 +69,7 @@ public class TouristController {
         }
 
         for (TouristAttraction attraction : service.getAttractions()){
-            if (update.getNewName().equalsIgnoreCase(attraction.getName())){
+            if (update.getNewName() != null && update.getNewName().equalsIgnoreCase(attraction.getName())){
                 return new ResponseEntity<AttractionUpdate>(update, HttpStatus.BAD_REQUEST);
             }
         }
