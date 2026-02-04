@@ -49,9 +49,8 @@ public class TouristController {
             }
         }
 
-        TouristAttraction createdAttraction = new TouristAttraction(attraction.getName(), attraction.getDescription());
-        service.addAttraction(createdAttraction.getName(), createdAttraction.getDescription());
-        return new ResponseEntity<TouristAttraction>(createdAttraction, HttpStatus.CREATED);
+        service.addAttraction(attraction.getName(), attraction.getDescription());
+        return new ResponseEntity<TouristAttraction>(attraction, HttpStatus.CREATED);
     }
 
 
